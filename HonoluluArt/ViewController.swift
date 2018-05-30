@@ -34,7 +34,7 @@ import MapKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-    
+    var artworks: [Artwork] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,21 @@ class ViewController: UIViewController {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
                                                                   regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func loadInitialData() {
+        guard let fileName = Bundle.main.path(forResource: "PublicArt", ofType: "json")
+            else { return }
+        let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
+        
+        guard
+            let data = optionalData,
+            let json = try? JSONSerialization.jsonObject(with: data),
+            let dictionary = json as? [String: Any],
+            let works = dictionary["data"] as? [[Any]]
+            else { return }
+        let validWorks = works.flatMap { Artwork(json: $0) }
+        artworks.append(contentsOf: validWorks)
     }
 
 }
