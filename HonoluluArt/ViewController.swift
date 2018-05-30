@@ -43,7 +43,10 @@ class ViewController: UIViewController {
         centerMapOnLocation(location: initialLocation)
         
         mapView.delegate = self
-        mapView.register(ArtworkMarkerView.self,
+//        mapView.register(ArtworkMarkerView.self,
+//                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+
+        mapView.register(ArtworkView.self,
                          forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
         loadInitialData()
