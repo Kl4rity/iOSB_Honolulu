@@ -41,6 +41,21 @@ class Artwork: NSObject, MKAnnotation {
         return locationName
     }
     
+    var markerTintColor: UIColor  {
+        switch discipline {
+        case "Monument":
+            return .red
+        case "Mural":
+            return .cyan
+        case "Plaque":
+            return .blue
+        case "Sculpture":
+            return .purple
+        default:
+            return .green
+        }
+    }
+    
     func mapItem() -> MKMapItem {
         let addressDict = [CNPostalAddressStreetKey: subtitle!]
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: addressDict)
