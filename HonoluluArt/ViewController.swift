@@ -44,11 +44,8 @@ class ViewController: UIViewController {
         
         mapView.delegate = self
         
-        let artwork = Artwork(title: "King David Kalakaua",
-                              locationName: "Waikiki Gateway Park",
-                              discipline: "Sculpture",
-                              coordinate: CLLocationCoordinate2D(latitude: 21.283921, longitude: -157.831661))
-        mapView.addAnnotation(artwork)
+        loadInitialData()
+        mapView.addAnnotations(artworks)
         
   }
     
